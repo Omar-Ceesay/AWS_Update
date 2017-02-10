@@ -1,0 +1,17 @@
+version: 0.1
+
+phases:
+    install:
+        commands:
+            - echo installing gitbook-cli...
+            - npm install -g gitbook-cli
+    build:
+        commands:
+            - echo building book...
+            - gitbook build
+            - echo GitBook build completed
+    post_build:
+        commands:
+            - echo syncing with S3...
+            - echo $S3_BUCKET
+            - aws s3 sync _book/ s3://$S3_BUCKET
